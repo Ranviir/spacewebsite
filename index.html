@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Encyclopedia - Ultimate Space Resource</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #0a0a18;
+            --neon-blue: #00f3ff;
+            --star-yellow: #ffe600;
+            --deep-space: #000035;
+            --galaxy-purple: #6c00ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: var(--space-black);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: star-drift 200s linear infinite;
+        }
+
+        @keyframes star-drift {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100%); }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        .nebula {
+            position: fixed;
+            width: 200vw;
+            height: 200vh;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(108, 0, 255, 0.1) 0%,
+                rgba(0, 243, 255, 0.05) 30%,
+                rgba(10, 10, 24, 0) 70%
+            );
+            animation: nebula-float 40s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes nebula-float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, white);
+            animation: shoot 3s infinite;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translate(-100vw, -100vh) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100vw, 100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 24, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--galaxy-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-section {
+            padding: 4rem 2rem;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .missions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mission-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--neon-blue);
+            backdrop-filter: blur(5px);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            border: 1px solid var(--galaxy-purple);
+            backdrop-filter: blur(5px);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin: 2rem 0 4rem;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="space-background">
+        <div class="stars"></div>
+        <div class="nebula"></div>
+        <div class="shooting-star" style="top: 20%; left: 10%; animation-delay: 2s"></div>
+        <div class="shooting-star" style="top: 70%; left: 30%; animation-delay: 5s"></div>
+    </div>
+
+    <nav class="nav-container">
+        <div class="logo">SPACE ENCYCLOPEDIA</div>
+    </nav>
+
+    <section class="hero">
+        <div>
+            <h1>Universal Knowledge Repository</h1>
+            <p>Comprehensive guide to space exploration, astronomy, and astrophysics</p>
+        </div>
+    </section>
+
+<section class="content-section" id="timeline">
+        <h2 class="section-title">Space Exploration Chronology</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>1957</h3>
+                <p>🛰️ Sputnik 1: First artificial satellite launched by USSR</p>
+                <p>📅 October 4, 1957 | 🚀 R-7 rocket</p>
+            </div>
+            <div class="timeline-item">
+                <h3>1961</h3>
+                <p>👨🚀 Yuri Gagarin becomes first human in space</p>
+                <p>⏱️ 108-minute orbital flight | 🚀 Vostok 1</p>
+            </div>
+            <div class="timeline-item">
+                <h3>1969</h3>
+                <p>🌕 Apollo 11: First manned Moon landing</p>
+                <p>👨🚀 Armstrong & Aldrin | 📍 Sea of Tranquility</p>
+            </div>
+            <div class="timeline-item">
+                <h3>1971</h3>
+                <p>🛰️ Salyut 1: First space station launched</p>
+                <p>🇷🇺 Soviet Union | 🔧 15.8m length | 💀 Deorbited 1971</p>
+            </div>
+            <div class="timeline-item">
+                <h3>1990</h3>
+                <p>🔭 Hubble Space Telescope deployed</p>
+                <p>🚀 Discovery STS-31 | 📏 13.2m length | 🌌 Revolutionized astronomy</p>
+            </div>
+            <div class="timeline-item">
+                <h3>1998</h3>
+                <p>🛰️ ISS: First module launched (Zarya)</p>
+                <p>🌍 16 nations collaboration | 🏗️ 420-ton structure</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2012</h3>
+                <p>🚀 SpaceX Dragon: First commercial spacecraft to ISS</p>
+                <p>🔄 Reusable rocket technology | 🚀 Falcon 9</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2021</h3>
+                <p>🪐 James Webb Space Telescope launched</p>
+                <p>🔭 6.5m gold mirror | 🌌 Lagrange Point 2 orbit</p>
+            </div>
+        </div>
+    </section>
+
+<section class="content-section" id="planets">
+    <h2 class="section-title">Solar System Bodies</h2>
+    <div class="missions-grid">
+        <div class="mission-card">
+            <h3>🌞 Sun</h3>
+            <p>⭐ Type: G2V main-sequence</p>
+            <p>🔥 Core Temp: 15M°C | Age: 4.6B years</p>
+            <p>💫 Rotation: 27 days (equatorial)</p>
+        </div>
+        <div class="mission-card">
+            <h3>🌑 Mercury</h3>
+            <p>📏 Diameter: 4,880 km</p>
+            <p>☄️ Orbital Period: 88 days</p>
+            <p>🌡️ Temp Range: -180°C to 430°C</p>
+        </div>
+        <div class="mission-card">
+            <h3>♀ Venus</h3>
+            <p>🔥 Surface Temp: 462°C</p>
+            <p>🌫️ Atmosphere: 96% CO₂</p>
+            <p>⏳ Day Length: 243 Earth days</p>
+        </div>
+        <div class="mission-card">
+            <h3>🌍 Earth</h3>
+            <p>🛰️ Natural Satellite: Moon</p>
+            <p>🌊 Surface: 71% water</p>
+            <p>🧲 Magnetic Field: Protective shield</p>
+        </div>
+        <div class="mission-card">
+            <h3>♂ Mars</h3>
+            <p>🏔️ Highest Peak: Olympus Mons</p>
+            <p>🔴 Iron Oxide Surface</p>
+            <p>🧊 Polar Ice Caps: Water & CO₂</p>
+        </div>
+        <div class="mission-card">
+            <h3>♃ Jupiter</h3>
+            <p>🌀 Great Red Spot: 400mph winds</p>
+            <p>🛰️ Moons: 95 confirmed</p>
+            <p>📏 Diameter: 139,820 km</p>
+        </div>
+        <div class="mission-card">
+            <h3>♄ Saturn</h3>
+            <p>💍 Rings: 7 main groups</p>
+            <p>🛰️ Moons: 146 (Titan largest)</p>
+            <p>🪐 Density: 0.687 g/cm³</p>
+        </div>
+        <div class="mission-card">
+            <h3>♅ Uranus</h3>
+            <p>🔄 Retrograde Rotation</p>
+            <p>🌡️ Temp: -224°C</p>
+            <p>💎 Ice Giant Composition</p>
+        </div>
+        <div class="mission-card">
+            <h3>♆ Neptune</h3>
+            <p>💨 Winds: 2,100 km/h</p>
+            <p>🌌 Dark Spot: Massive storm</p>
+            <p>📏 Distance: 4.5B km from Sun</p>
+        </div>
+        <div class="mission-card">
+            <h3>🌑 Europa</h3>
+            <p>🛰️ Jupiter's Moon</p>
+            <p>🧊 Icy Crust: 15km thick</p>
+            <p>🌊 Subsurface Ocean potential</p>
+        </div>
+        <div class="mission-card">
+            <h3>🌑 Titan</h3>
+            <p>🛰️ Saturn's Moon</p>
+            <p>🌫️ Thick Nitrogen Atmosphere</p>
+            <p>🛢️ Liquid Methane Lakes</p>
+        </div>
+        <div class="mission-card">
+            <h3>☄️ Halley's Comet</h3>
+            <p>📅 Next Perihelion: 2061</p>
+            <p>📏 Nucleus: 15×8×8 km</p>
+            <p>🌠 Orbital Period: 76 years</p>
+        </div>
+    </div>
+</section>
+
+<section class="content-section" id="tech">
+    <h2 class="section-title">Space Technology</h2>
+    <div class="missions-grid">
+        <div class="mission-card">
+            <h3>🚀 Saturn V</h3>
+            <p>📏 Height: 110.6m</p>
+            <p>🏋️ Payload: 140t to LEO</p>
+            <p>🔥 F-1 Engines: 7.6M lbf thrust</p>
+        </div>
+        <div class="mission-card">
+            <h3>🔭 Hubble</h3>
+            <p>🛰️ Orbit: 547km altitude</p>
+            <p>📷 Mirror: 2.4m diameter</p>
+            <p>🌌 Operational: 1990-2021</p>
+        </div>
+        <div class="mission-card">
+            <h3>🛰️ Voyager 1</h3>
+            <p>📡 Distance: 24B km</p>
+            <p>🎵 Golden Record carrier</p>
+            <p>⚡ Power: 3 RTGs</p>
+        </div>
+        <div class="mission-card">
+            <h3>🚀 Falcon Heavy</h3>
+            <p>🏋️ Payload: 64t to LEO</p>
+            <p>🔄 Reusable boosters</p>
+            <p>🔥 Merlin Engines: 27 total</p>
+        </div>
+        <div class="mission-card">
+            <h3>🧪 Ion Thruster</h3>
+            <p>⚡ Power: Solar electric</p>
+            <p>🚀 ISP: 3,000-5,000s</p>
+            <p>🛰️ Used in: Dawn mission</p>
+        </div>
+        <div class="mission-card">
+            <h3>🛰️ ISS</h3>
+            <p>📏 Size: 109m × 73m</p>
+            <p>🛰️ Altitude: 408 km</p>
+            <p>👨🚀 Crew: 7 permanent</p>
+        </div>
+        <div class="mission-card">
+            <h3>🧭 GPS III</h3>
+            <p>📡 Accuracy: <30 cm</p>
+            <p>🛰️ Constellation: 24 sats</p>
+            <p>🕒 Atomic Clock precision</p>
+        </div>
+        <div class="mission-card">
+            <h3>🛰️ James Webb</h3>
+            <p>🪐 Orbit: L2 Lagrange</p>
+            <p>📏 Mirror: 6.5m gold-coated</p>
+            <p>🌌 IR Observation capability</p>
+        </div>
+        <div class="mission-card">
+            <h3>🤖 Curiosity</h3>
+            <p>🔋 Power: RTG</p>
+            <p>🛰️ Landing: Sky Crane</p>
+            <p>⏳ Operational since 2012</p>
+        </div>
+        <div class="mission-card">
+            <h3>🚀 SLS Block 1</h3>
+            <p>🏋️ Payload: 95t to LEO</p>
+            <p>🔥 RS-25 Engines: 4 core</p>
+            <p>🌕 Artemis program</p>
+        </div>
+        <div class="mission-card">
+            <h3>🛰️ Chandra</h3>
+            <p>🔭 X-ray Observatory</p>
+            <p>🛰️ Orbit: 133,000km apogee</p>
+            <p>🌌 Operational since 1999</p>
+        </div>
+        <div class="mission-card">
+            <h3>🛰️ Starlink</h3>
+            <p>🛰️ Constellation: 4,000+</p>
+            <p>📶 Latency: <20ms</p>
+            <p>🚀 Falcon 9 launched</p>
+        </div>
+    </div>
+</section>
+
+    <script>
+        // Generate dynamic stars
+        function createStars() {
+            const container = document.querySelector('.stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.width = '2px';
+                star.style.height = '2px';
+                star.style.background = 'white';
+                star.style.borderRadius = '50%';
+                star.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.5)';
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite`;
+                container.appendChild(star);
+            }
+        }
+
+        // Scroll animations
+        function initScrollAnimations() {
+            document.querySelectorAll('.mission-card, .timeline-item').forEach(el => {
+                el.style.transform = 'translateY(20px)';
+                el.style.opacity = '0';
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.transform = 'translateY(0)';
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transition = 'all 0.6s ease-out';
+                        }
+                    });
+                });
+                
+                observer.observe(el);
+            });
+        }
+
+        // Initialize everything
+        window.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            initScrollAnimations();
+            
+            // Create shooting stars periodically
+            setInterval(() => {
+                const star = document.createElement('div');
+                star.className = 'shooting-star';
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                document.querySelector('.space-background').appendChild(star);
+                setTimeout(() => star.remove(), 3000);
+            }, 8000);
+        });
+    </script>
+</body>
+</html>
